@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
 	backdropVariants,
-	containerVariants,
 	modalVariants,
 } from '../constants/variants';
 
