@@ -1,45 +1,32 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { containerVariants, childsVariants } from '../constants/variants';
 
-const containerVariants = {
-	hidden: {
-		opacity: 0,
-		x: '100vw',
-	},
-	visible: {
-		opacity: 1,
-		x: 0,
-		transition: {
-			type: 'spring',
-      mass: 0.4,
-      damping: 8,
-      when: 'beforeChildren',
-      staggerChildren: 0.4,
-		},
-	},
-};
+const Order = ({ pizza, setShowModal }) => {
+	const [showTitle, setShowTitle] = useState(true);
 
-const childsVariants = {
-	hidden: {
-		opacity: 0,
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			type: 'spring',
-			stiffness: 120,
-		},
-	},
-};
+	useEffect(() => {
+		setTimeout(() => {
+			setShowModal(true);
+		}, 5000);
+	}, [setShowModal]);
+	
 
-const Order = ({ pizza }) => {
 	return (
 		<motion.div
 			variants={containerVariants}
 			initial='hidden'
 			animate='visible'
+			exit='exit'
 			className='container order'>
-			<h2>Thank you for your order :)</h2>
+			<motion.h2 exit={{ y: -1000 }}>
+				Thank you for your order{' '}
+				<span role='img' aria-label='Pizza'>
+					🍕
+				</span>{' '}
+				:)
+			</motion.h2>
+
 			<motion.p variants={childsVariants}>
 				You ordered a {pizza.base} pizza with:
 			</motion.p>
